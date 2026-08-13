@@ -1,0 +1,11 @@
+BasedOnStyle: Google
+
+BreakBeforeBraces: Allman
+IndentWidth: 4
+AccessModifierOffset: -2
+IndentAccessModifiers: false
+
+ColumnLimit: 0
+MaxEmptyLinesToKeep: 1
+PointerAlignment: Right
+SpaceBeforeParens: ControlStatements
