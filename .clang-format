@@ -15,6 +15,7 @@ SpaceBeforeParens: ControlStatements
 PointerAlignment: Left
 AlignTrailingComments: true
 MaxEmptyLinesToKeep: 1
+InsertNewlineAtEOF: true
 
 StatementMacros:
   - 'UPROPERTY'
