@@ -3,11 +3,6 @@
 ARotatingActor::ARotatingActor()
 {
     PrimaryActorTick.bCanEverTick = true;
-}
-
-void ARotatingActor::BeginPlay()
-{
-    Super::BeginPlay();
 
     SceneRoot = CreateDefaultSubobject<USceneComponent>(TEXT("SceneRoot"));
     SetRootComponent(SceneRoot);
@@ -16,6 +11,11 @@ void ARotatingActor::BeginPlay()
     StaticMeshComp->SetupAttachment(SceneRoot);
 
     RotatingSpeedYaw = 15.0f;
+}
+
+void ARotatingActor::BeginPlay()
+{
+    Super::BeginPlay();
 }
 
 void ARotatingActor::Tick(float DeltaTime)
