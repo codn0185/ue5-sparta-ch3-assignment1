@@ -35,4 +35,8 @@ class SPARTACH3ASSIGNMENT1_API AMovingPlatformActor : public AActor
 
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
+
+  public:
+	UFUNCTION(BlueprintCallable, Category = "Actions")
+	virtual void Initialize(const float& InMoveSpeed, const FVector& InMoveOffset);
 };
