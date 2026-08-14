@@ -22,8 +22,3 @@ void ARotatingActor::Tick(float DeltaTime)
 {
 	AddActorLocalRotation(RotatingSpeed * DeltaTime);
 }
-
-void ARotatingActor::Initialize(const FRotator& InRotatingSpeed)
-{
-	RotatingSpeed = InRotatingSpeed;
-}

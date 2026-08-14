@@ -41,8 +41,4 @@ class SPARTACH3ASSIGNMENT1_API ABlinkActor : public AActor
 	virtual void OnShowTimerFinished();
 	UFUNCTION(BlueprintCallable, Category = "Actions")
 	virtual void OnHideTimerFinished();
-
-  public:
-	UFUNCTION(BlueprintCallable, Category = "Actions")
-	virtual void Initialize(const float& InShowDuration, const float& InHideDuration, const float& InInitialDelay = 0.001f);
 };

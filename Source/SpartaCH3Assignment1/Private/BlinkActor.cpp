@@ -60,19 +60,3 @@ void ABlinkActor::OnHideTimerFinished()
 		ShowDuration,
 		false);
 }
-
-void ABlinkActor::Initialize(const float& InShowDuration, const float& InHideDuration, const float& InInitialDelay)
-{
-	ShowDuration = FMath::Max(InShowDuration, 0.001f);
-	HideDuration = FMath::Max(InHideDuration, 0.001f);
-	InitialDelay = FMath::Max(InInitialDelay, 0.001f);
-
-	GetWorldTimerManager().ClearTimer(BlinkTimerHandle);
-
-	GetWorldTimerManager().SetTimer(
-		BlinkTimerHandle,
-		this,
-		&ABlinkActor::OnShowTimerFinished,
-		InitialDelay,
-		false);
-}
