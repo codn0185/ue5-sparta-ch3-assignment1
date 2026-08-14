@@ -12,7 +12,6 @@ AMovingPlatformActor::AMovingPlatformActor()
 
 	MoveSpeed = 10.0f;
 	MoveOffset.X = 100.0f;
-	MovingTimerRate = 0.02f;
 }
 
 void AMovingPlatformActor::BeginPlay()
@@ -21,18 +20,11 @@ void AMovingPlatformActor::BeginPlay()
 
 	StartLocation = GetActorLocation();
 	EndLocation = StartLocation + MoveOffset;
-
-	GetWorld()->GetTimerManager().SetTimer(
-		MovingTimerHandle,
-		this,
-		&AMovingPlatformActor::MoveActor,
-		MovingTimerRate,
-		true);
 }
 
-void AMovingPlatformActor::MoveActor()
+void AMovingPlatformActor::Tick(float DeltaTime)
 {
-	FVector NewLocation = FMath::VInterpConstantTo(GetActorLocation(), EndLocation, MovingTimerRate, MoveSpeed);
+	FVector NewLocation = FMath::VInterpConstantTo(GetActorLocation(), EndLocation, DeltaTime, MoveSpeed);
 	SetActorLocation(NewLocation);
 	if (NewLocation.Equals(EndLocation))
 	{

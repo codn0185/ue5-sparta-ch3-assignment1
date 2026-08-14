@@ -32,13 +32,7 @@ class SPARTACH3ASSIGNMENT1_API AMovingPlatformActor : public AActor
 	float MoveSpeed;  // 이동 속도
 	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Properties")
 	FVector MoveOffset;  // 왕복 이동 거리
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Properties", meta = (ClampMin = "0.001", UIMin = "0.001"))
-	float MovingTimerRate;  // 이동 타이머 주기
-	UPROPERTY()
-	FTimerHandle MovingTimerHandle;  // 이동 타이머 핸들
 
 	virtual void BeginPlay() override;
-
-	UFUNCTION(BlueprintCallable, Category = "Actions")
-	virtual void MoveActor();
+	virtual void Tick(float DeltaTime) override;
 };
