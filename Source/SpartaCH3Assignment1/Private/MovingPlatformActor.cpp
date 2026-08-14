@@ -11,7 +11,7 @@ AMovingPlatformActor::AMovingPlatformActor()
 	StaticMeshComp->SetupAttachment(SceneRoot);
 
 	MoveSpeed = 10.0f;
-	MaxRange = 100.0f;
+	MoveOffset.X = 100.0f;
 	MovingTimerRate = 0.02f;
 }
 
@@ -20,7 +20,7 @@ void AMovingPlatformActor::BeginPlay()
 	Super::BeginPlay();
 
 	StartLocation = GetActorLocation();
-	EndLocation = StartLocation + FVector(MaxRange, 0.0f, 0.0f);
+	EndLocation = StartLocation + MoveOffset;
 
 	GetWorld()->GetTimerManager().SetTimer(
 		MovingTimerHandle,
