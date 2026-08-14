@@ -2,7 +2,7 @@
 
 ARotatingActor::ARotatingActor()
 {
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 
 	SceneRoot = CreateDefaultSubobject<USceneComponent>(TEXT("SceneRoot"));
 	SetRootComponent(SceneRoot);
@@ -11,16 +11,22 @@ ARotatingActor::ARotatingActor()
 	StaticMeshComp->SetupAttachment(SceneRoot);
 
 	RotatingSpeedYaw = 15.0f;
+	RotationTimerRate = 0.2f;
 }
 
 void ARotatingActor::BeginPlay()
 {
 	Super::BeginPlay();
+
+	GetWorld()->GetTimerManager().SetTimer(
+		RotationTimerHandle,
+		this,
+		&ARotatingActor::RotateActor,
+		RotationTimerRate,
+		true);
 }
 
-void ARotatingActor::Tick(float DeltaTime)
+void ARotatingActor::RotateActor()
 {
-	Super::Tick(DeltaTime);
-
-	AddActorLocalRotation(FRotator(0.0f, RotatingSpeedYaw * DeltaTime, 0.0f));
+	AddActorLocalRotation(FRotator(0.0f, RotatingSpeedYaw * RotationTimerRate, 0.0f));
 }
