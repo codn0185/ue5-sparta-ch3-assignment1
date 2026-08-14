@@ -23,8 +23,8 @@ class SPARTACH3ASSIGNMENT1_API ARotatingActor : public AActor
 
 	// Properties
 	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Properties")
-	float RotatingSpeedYaw;  // z축 기준 회전 속도 (초 당 회전 각도)
-	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Properties")
+	FRotator RotatingSpeed;  // 회전 속도 (각 방향 별 초 당 회전 각도)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Properties")
 	float RotationTimerRate;  // 회전 타이머 주기
 	UPROPERTY()
 	FTimerHandle RotationTimerHandle;  // 회전 타이머 핸들

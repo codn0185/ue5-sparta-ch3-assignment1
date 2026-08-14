@@ -10,8 +10,8 @@ ARotatingActor::ARotatingActor()
 	StaticMeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMesh"));
 	StaticMeshComp->SetupAttachment(SceneRoot);
 
-	RotatingSpeedYaw = 15.0f;
-	RotationTimerRate = 0.2f;
+	RotatingSpeed.Yaw = 30.0f;
+	RotationTimerRate = 0.02f;
 }
 
 void ARotatingActor::BeginPlay()
@@ -28,5 +28,5 @@ void ARotatingActor::BeginPlay()
 
 void ARotatingActor::RotateActor()
 {
-	AddActorLocalRotation(FRotator(0.0f, RotatingSpeedYaw * RotationTimerRate, 0.0f));
+	AddActorLocalRotation(RotatingSpeed * RotationTimerRate);
 }
