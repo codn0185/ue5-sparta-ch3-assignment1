@@ -12,7 +12,6 @@ AMovingPlatformActor::AMovingPlatformActor()
 
 	MoveSpeed = 10.0f;
 	MaxRange = 100.0f;
-	bDirection = true;
 }
 
 void AMovingPlatformActor::BeginPlay()
@@ -27,22 +26,10 @@ void AMovingPlatformActor::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	if (bDirection)
+	FVector NewLocation = FMath::VInterpConstantTo(GetActorLocation(), EndLocation, DeltaTime, MoveSpeed);
+	SetActorLocation(NewLocation);
+	if (NewLocation.Equals(EndLocation))
 	{
-		FVector NewLocation = FMath::VInterpConstantTo(GetActorLocation(), EndLocation, DeltaTime, MoveSpeed);
-		SetActorLocation(NewLocation);
-		if (NewLocation.Equals(EndLocation))
-		{
-			bDirection = false;
-		}
-	}
-	else
-	{
-		FVector NewLocation = FMath::VInterpConstantTo(GetActorLocation(), StartLocation, DeltaTime, MoveSpeed);
-		SetActorLocation(NewLocation);
-		if (NewLocation.Equals(StartLocation))
-		{
-			bDirection = true;
-		}
+		std::swap(StartLocation, EndLocation);
 	}
 }

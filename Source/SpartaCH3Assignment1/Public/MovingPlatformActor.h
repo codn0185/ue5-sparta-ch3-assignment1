@@ -32,8 +32,6 @@ class SPARTACH3ASSIGNMENT1_API AMovingPlatformActor : public AActor
 	float MoveSpeed;  // 이동 속도
 	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Properties")
 	float MaxRange;  // 왕복 이동 거리 (x축 방향)
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Properties")
-	bool bDirection;  // 이동 방향
 
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
