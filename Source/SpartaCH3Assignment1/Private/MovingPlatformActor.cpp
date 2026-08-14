@@ -31,3 +31,12 @@ void AMovingPlatformActor::Tick(float DeltaTime)
 		std::swap(StartLocation, EndLocation);
 	}
 }
+
+void AMovingPlatformActor::Initialize(const float& InMoveSpeed, const FVector& InMoveOffset)
+{
+	MoveSpeed = FMath::Max(InMoveSpeed, 0.001f);
+	MoveOffset = InMoveOffset;
+
+	StartLocation = GetActorLocation();
+	EndLocation = StartLocation + MoveOffset;
+}
