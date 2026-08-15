@@ -10,33 +10,41 @@ AMovingPlatformActor::AMovingPlatformActor()
 	StaticMeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMesh"));
 	StaticMeshComp->SetupAttachment(SceneRoot);
 
+	StartPointComp = CreateDefaultSubobject<USceneComponent>(TEXT("StartPoint"));
+	StartPointComp->SetupAttachment(SceneRoot);
+	StartPointComp->SetRelativeLocation(FVector::ZeroVector);
+
+	EndPointComp = CreateDefaultSubobject<USceneComponent>(TEXT("EndPoint"));
+	EndPointComp->SetupAttachment(SceneRoot);
+	EndPointComp->SetRelativeLocation(FVector(100.0f, 0.0f, 0.0f));
+
 	MoveSpeed = 10.0f;
-	MoveOffset.X = 100.0f;
+	bMovingDirection = true;
 }
 
 void AMovingPlatformActor::BeginPlay()
 {
 	Super::BeginPlay();
-
-	StartLocation = GetActorLocation();
-	EndLocation = StartLocation + MoveOffset;
 }
 
 void AMovingPlatformActor::Tick(float DeltaTime)
 {
-	FVector NewLocation = FMath::VInterpConstantTo(GetActorLocation(), EndLocation, DeltaTime, MoveSpeed);
-	SetActorLocation(NewLocation);
-	if (NewLocation.Equals(EndLocation))
+	const FVector& TargetLocation = bMovingDirection ? EndPointComp->GetRelativeLocation() : StartPointComp->GetRelativeLocation();  // 목표 지점
+	const FVector& NewLocation = FMath::VInterpConstantTo(StaticMeshComp->GetRelativeLocation(), TargetLocation, DeltaTime, MoveSpeed);
+	StaticMeshComp->SetRelativeLocation(NewLocation);
+
+	if (bMovingDirection && NewLocation.Equals(EndPointComp->GetRelativeLocation()))  // EndPointComp 도달
 	{
-		std::swap(StartLocation, EndLocation);
+		bMovingDirection = false;
+	}
+	else if (!bMovingDirection && NewLocation.Equals(StartPointComp->GetRelativeLocation()))  // StartPointComp 도달
+	{
+		bMovingDirection = true;
 	}
 }
 
 void AMovingPlatformActor::Initialize(const float& InMoveSpeed, const FVector& InMoveOffset)
 {
 	MoveSpeed = FMath::Max(InMoveSpeed, 0.001f);
-	MoveOffset = InMoveOffset;
-
-	StartLocation = GetActorLocation();
-	EndLocation = StartLocation + MoveOffset;
+	EndPointComp->SetRelativeLocation(InMoveOffset);
 }
