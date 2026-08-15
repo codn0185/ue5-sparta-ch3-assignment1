@@ -38,5 +38,5 @@ class SPARTACH3ASSIGNMENT1_API AMovingPlatformActor : public AActor
 
   public:
 	UFUNCTION(BlueprintCallable, Category = "Actions")
-	virtual void Initialize(const float& InMoveSpeed, const FVector& InMoveOffset);
+	virtual void Initialize(const float& InMoveSpeed, const FVector& InRelativeStartPoint, const FVector& InRelativeEndPoint, const bool& bInMovingDirection = true);
 };

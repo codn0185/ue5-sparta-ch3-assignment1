@@ -43,8 +43,10 @@ void AMovingPlatformActor::Tick(float DeltaTime)
 	}
 }
 
-void AMovingPlatformActor::Initialize(const float& InMoveSpeed, const FVector& InMoveOffset)
+void AMovingPlatformActor::Initialize(const float& InMoveSpeed, const FVector& InRelativeStartPoint, const FVector& InRelativeEndPoint, const bool& bInMovingDirection)
 {
 	MoveSpeed = FMath::Max(InMoveSpeed, 0.001f);
-	EndPointComp->SetRelativeLocation(InMoveOffset);
+	StartPointComp->SetRelativeLocation(InRelativeStartPoint);
+	EndPointComp->SetRelativeLocation(InRelativeEndPoint);
+	bMovingDirection = bInMovingDirection;
 }

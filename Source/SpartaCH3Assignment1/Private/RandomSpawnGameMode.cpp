@@ -24,6 +24,7 @@ void ARandomSpawnGameMode::BeginPlay()
 			if (AMovingPlatformActor* MovingPlatformActor = Cast<AMovingPlatformActor>(SpawnedActor))
 			{
 				MovingPlatformActor->Initialize(FMath::RandRange(1.0f, 20.0f),
+												FVector::ZeroVector,
 												FVector(FMath::RandRange(-100.0f, 100.0f),
 														FMath::RandRange(-100.0f, 100.0f),
 														FMath::RandRange(-100.0f, 100.0f)));
